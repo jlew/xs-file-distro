@@ -1,3 +1,11 @@
+What is this project?
+This is a php script that will act as a file library for the XO Server (XS).
+The goal of this script is to build sever that will act as the back end
+for an application on the XO PCs that will allow a central file library.
+
+This project's original motivation was to build a library back end for the XS
+to allow easy download of e-books on the XOs in a school setting.
+
 Dependencies:
   * A recent copy of the codeigniter framework: http://codeigniter.com/
   * Apache server with sql and php support
@@ -9,3 +17,18 @@ Installation:
    * Unzip the file and copy the system folder to be one directory above
      the src directory (if placed somewhere else then edit system path
      variable the index.php in the src directory)
+     
+
+Proposed Features:
+    Upload/Download/Browse API as well as web browser access.
+    All files will have searchable meta-data
+    Admins:
+        - Add/Delete/Edit files
+        - Configure admin and set basic permissions of users
+    Normal Users
+        - Have public file upload directory
+        - May manage their own files
+
+
+Contact:
+    Justin Lewis        jtl1728@rit.edu

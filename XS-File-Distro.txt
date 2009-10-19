@@ -1,1 +1,11 @@
-Initial Commit
+Dependencies:
+  * A recent copy of the codeigniter framework: http://codeigniter.com/
+  * Apache server with sql and php support
+
+Installation:
+   * Configure webserver to point to the src directory as the
+     root directory
+   * Download a copy of the codeigniter framework.
+   * Unzip the file and copy the system folder to be one directory above
+     the src directory (if placed somewhere else then edit system path
+     variable the index.php in the src directory)

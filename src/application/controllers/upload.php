@@ -3,7 +3,7 @@
 class Upload extends Controller {
     function Upload(){
         parent::Controller();
-        $this->load->helper(array('form', 'url'));
+        $this->load->helper('form');
     }
     
     function index(){   

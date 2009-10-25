@@ -16,6 +16,7 @@
         <td>{date}</td>
         <td>{description}</td>
         <td>{size}</td>
+        <td><a href="<?php echo site_url("manage/file/");?>/{ID}">Manage File</a></td>
     </tr>
     {/filelist}
 </table>

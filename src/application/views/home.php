@@ -3,6 +3,7 @@
 <title>XS File Lib</title>
 </head>
 <body>
+<?php echo anchor("/upload","Upload File"); ?>
 
 <p>Home Page Here</p>
 

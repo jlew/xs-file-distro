@@ -3,7 +3,7 @@
 <title>MANAGE FILE Here</title>
 </head>
 <body>
-
+<?php echo anchor("/","Home");?>
 <p>MANAGE FILE Here</p>
 {info}
 <table width="85%" border="1">

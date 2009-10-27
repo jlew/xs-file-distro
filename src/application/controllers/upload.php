@@ -27,7 +27,7 @@ class Upload extends Controller {
                 $data['upload_data']['raw_name'],
                 $data['upload_data']['file_name'],
                 $data['upload_data']['file_type'],
-                "TODO:DESC",
+                $this->input->post('description'),
                 $data['upload_data']['file_size']
             );
 

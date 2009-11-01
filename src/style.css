@@ -1,0 +1,30 @@
+div.file-container{
+	border: 1px solid black;
+	width: 80%;
+	padding: 5px;
+	margin: 5px;
+}
+
+div.containerTitle, div.containerSubTitle{
+	background: #EEE;
+}
+
+div.fileDescription{
+	font-style: italic;
+	padding: 5px;
+}
+
+div.fileOptions{
+
+}
+
+div.fileName, div.fileType, div.fileSize, div.fileDate{
+display:inline;
+}
+
+div.fileType, div.fileDate{
+	float: right;
+}
+
+div.fileName, div.fileSize{
+}

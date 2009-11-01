@@ -74,4 +74,21 @@ class db_files extends Model {
         $query = $this->db->query( $sql, array( $id ) );
         return $query->result_array();
     }
+
+    function getTagList(){
+        //TODO GET COUNT AND ORDER
+        $sql = "SELECT * FROM `tags`";
+        $query = $this->db->query( $sql );
+        return $query->result_array();
+    }
+
+    function getFilesByTag( $tag ){
+        $tag_id = $this->_tagID( $tag );
+
+        if( $tag_id != -1 ){
+            $sql = "SELECT `file`.* FROM `file` LEFT JOIN `tag-map` ON `file`.`id` = `tag-map`.`file_id` WHERE `tag-map`.`tag_id` = ?;";
+            $query = $this->db->query( $sql, array( $tag_id ) );
+            return $query->result_array();
+        }
+    }
 }

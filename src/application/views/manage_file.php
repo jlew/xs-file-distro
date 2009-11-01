@@ -1,10 +1,3 @@
-<html>
-<head>
-<title>MANAGE FILE Here</title>
-</head>
-<body>
-<?php echo anchor("/","Home");?>
-<p>MANAGE FILE Here</p>
 {info}
 <table width="85%" border="1">
     <tr>
@@ -24,7 +17,7 @@ TAGS:
 <table>
     {tags}
     <tr>
-    <td width="150px">{name}</td>
+    <td width="150px"><a href="<?php echo site_url("home/tag/");?>/{name}">{name}</td>
     <td><a href="<?php echo site_url("manage/file/$id/removetag");?>/{name}" alt="Remove Tag">Delete</a></td>
     </tr>
     {/tags}
@@ -36,6 +29,3 @@ TAGS:
     echo form_submit('submit', 'Add Tag');
 ?>
 </form>
-
-</body>
-</html>

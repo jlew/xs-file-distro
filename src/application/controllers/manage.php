@@ -7,10 +7,7 @@ class Manage extends Controller {
     }
 	
     function index(){
-        //$data['filelist'] = $this->db_files->getFileList();
-
-        //$this->load->library('parser');
-        //$this->parser->parse( 'home', $data );
+        redirect( "home" );
     }
 
     function file( $id, $action='show', $data='' ){
@@ -25,10 +22,14 @@ class Manage extends Controller {
 
         $data['id'] = $id;
         $data['info'] = array($this->db_files->getFileInfo( $id ));
+        $data['page_title'] = "Manage " . $data['info'][0]['name'];
         $data['tags'] = $this->db_files->getTags( $id );
 
         $this->load->library('parser');
+        
+        $this->load->view('header', $data);
         $this->parser->parse( 'manage_file', $data );
+        $this->load->view('footer');
     
     }
 }

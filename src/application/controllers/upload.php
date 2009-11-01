@@ -6,14 +6,17 @@ class Upload extends Controller {
         $this->load->helper('form');
     }
     
-    function index(){   
+    function index(){
+        $this->load->view('header', array('page_title'=>"Upload file"));
         $this->load->view('upload_form', array('error' => ' ' ));
+        $this->load->view('footer');
     }
 
     function do_upload(){
         $this->load->library('upload');
         $this->load->model('db_files');
 
+        $this->load->view('header', array('page_title'=>"Upload file"));
         if ( ! $this->upload->do_upload()){
             $error = array('error' => $this->upload->display_errors());
 
@@ -33,6 +36,7 @@ class Upload extends Controller {
 
             $this->load->view('upload_success', $data);
         }
+        $this->load->view('footer');
     }
 }
 ?>

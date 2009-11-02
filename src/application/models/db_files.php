@@ -1,23 +1,30 @@
 <?php
+// This modle file uses code iginter's active record system to ensure
+// portability. Documentation can be found here
+// http://codeigniter.com/user_guide/database/active_record.html
 class db_files extends Model {
     function db_files() {
         parent::Model();
     }
 
     function addFile( $name, $filename, $type, $desc, $size){
-        $sql = 'INSERT INTO `file` (`name`, `filename`, `type`, `description`, `size`) VALUES ( ?,?,?,?,? )';
-        return $this->db->query( $sql, array($name, $filename, $type, $desc, $size));
+        $data = array(
+            'name' => $name,
+            'filename' => $filename,
+            'type' => $type,
+            'description' => $desc,
+            'size' => $size
+            );
+        return $this->db->insert('file', $data);
     }
 
     function getFileList(){
-        $sql = "SELECT * FROM  `file`";
-        $query = $this->db->query( $sql );
+        $query = $this->db->get('file');
         return $query->result_array();
     }
 
     function getFileInfo( $id ){
-        $sql = "SELECT * FROM `file` WHERE `id`=?";
-        $query = $this->db->query( $sql, array( $id ) );
+        $query = $this->db->get_where('file', array('id' => $id));
         
         if ($query->num_rows() > 0){
             return $query->row_array(); 
@@ -29,25 +36,28 @@ class db_files extends Model {
         $tagID = $this->_tagID($tag);
         if( $tagID == -1 ){
             //Add tag
-            $sql = "INSERT INTO `tags` ( `name` ) VALUES ( ? );";
-            $query = $this->db->query( $sql, array( $tag ) );
+            $data = array( 'name' => $tag );
+            $this->db->insert('tags', $data); 
             $tagID = $this->db->insert_id();
         }
 
-        //Do not add if tag exists for file
-        $sql = "SELECT `id` FROM `tag-map` WHERE `file_id` = ? AND `tag_id` = ? LIMIT 1;";
-        $query = $this->db->query( $sql, array( $id, $tagID ) );
+        //Do not add if tag exists for file        
+        $this->db->select('id');
+        $this->db->where('file_id', $id);
+        $this->db->where('tag_id', $tagID);
+        $query = $this->db->get('tagmap',1);
+
+        //If no rows returned, add record
         if( $query->num_rows() == 0 ){
-            $sql = "INSERT INTO  `tag-map` (`file_id`,`tag_id`)VALUES (?,?);";
-            $sql = $this->db->query( $sql, array( $id, $tagID ) );
+            $data = array( 'file_id' => $id, 'tag_id' => $tagID );
+            $this->db->insert('tagmap', $data);
         }
     }
 
     function removeTag($id, $tag){
         $tagID = $this->_tagID($tag);
         if( $tagID != -1 ){
-            $sql = "DELETE FROM `tag-map` WHERE `file_id` = ? AND `tag_id` = ?;";
-            $sql = $this->db->query( $sql, array( $id, $tagID ) );
+            $this->db->delete('tagmap', array('file_id' => $id, 'tag_id' => $tagID)); 
             $this->_cleanOrphanTag( $tagID );
         }
     }
@@ -58,8 +68,9 @@ class db_files extends Model {
 
     function _tagID( $tag ){
         //Check if tag exists
-        $sql = "SELECT `tag_id` FROM  `tags` WHERE  `name` =  ? LIMIT 1;";
-        $query = $this->db->query( $sql, array( $tag ) );
+        $this->db->select('tag_id');
+        $this->db->where('name', $tag); 
+        $query = $this->db->get('tags',1);
         
         if ($query->num_rows() > 0){
             $row = $query->row();
@@ -69,16 +80,16 @@ class db_files extends Model {
     }
     
     function getTags($id){
-        $sql = "SELECT `tag-map`.`id`, `tags`.`name` FROM  `tag-map` " .
-               "INNER JOIN `tags` ON `tag-map`.`tag_id` = `tags`.`tag_id` WHERE  `tag-map`.`file_id`=?";
-        $query = $this->db->query( $sql, array( $id ) );
+        $this->db->select('tagmap.*, tags.name');
+        $this->db->from('tagmap');
+        $this->db->join('tags', 'tagmap.tag_id = tags.tag_id', 'inner');
+        $this->db->where('tagmap.file_id', $id );
+        $query = $this->db->get();
         return $query->result_array();
     }
 
     function getTagList(){
-        //TODO GET COUNT AND ORDER
-        $sql = "SELECT * FROM `tags`";
-        $query = $this->db->query( $sql );
+        $query = $this->db->get('tags');
         return $query->result_array();
     }
 
@@ -86,8 +97,11 @@ class db_files extends Model {
         $tag_id = $this->_tagID( $tag );
 
         if( $tag_id != -1 ){
-            $sql = "SELECT `file`.* FROM `file` LEFT JOIN `tag-map` ON `file`.`id` = `tag-map`.`file_id` WHERE `tag-map`.`tag_id` = ?;";
-            $query = $this->db->query( $sql, array( $tag_id ) );
+            $this->db->select('file.*');
+            $this->db->from('file');
+            $this->db->join('tagmap', 'file.id = tagmap.file_id', 'left');
+            $this->db->where('tagmap.tag_id', $tag_id);
+            $query = $this->db->get();
             return $query->result_array();
         }
     }

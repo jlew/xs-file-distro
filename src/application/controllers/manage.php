@@ -13,7 +13,7 @@ class Manage extends Controller {
     function file( $id, $action='show', $data='' ){
 
         if( $action == 'addtag'){
-            $this->db_files->addTag( $id, $this->input->post('tag') );
+            $this->db_files->addTag( $id, url_title($this->input->post('tag')) );
             redirect("/manage/file/$id");
         }else if( $action == 'removetag' ){
             $this->db_files->removeTag( $id, $data );

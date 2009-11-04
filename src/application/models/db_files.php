@@ -67,7 +67,11 @@ class db_files extends Model {
     }
 
     function _cleanOrphanTag( $tagID ){
-        //TODO: Check if orphan and clean if so
+        $query = $this->db->where('tag_id', $tagID);
+        $this->db->from('tagmap');
+        if( $this->db->count_all_results() == 0 ){
+            $this->db->delete('tags',array( 'tag_id'=>$tagID));
+        }
     }
 
     function _tagID( $tag ){

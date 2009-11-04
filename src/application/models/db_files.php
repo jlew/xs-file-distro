@@ -56,6 +56,10 @@ class db_files extends Model {
 
     function removeTag($id, $tag){
         $tagID = $this->_tagID($tag);
+        $this->removeTagById( $id, $tagID );
+    }
+    
+    function removeTagById($id, $tagID){
         if( $tagID != -1 ){
             $this->db->delete('tagmap', array('file_id' => $id, 'tag_id' => $tagID)); 
             $this->_cleanOrphanTag( $tagID );
@@ -93,9 +97,13 @@ class db_files extends Model {
         return $query->result_array();
     }
 
+
     function getFilesByTag( $tag ){
         $tag_id = $this->_tagID( $tag );
-
+        $this->getFilesByTagId( $tag_id );
+    }
+    
+    function getFilesByTagId( $tag_id ){
         if( $tag_id != -1 ){
             $this->db->select('file.*');
             $this->db->from('file');

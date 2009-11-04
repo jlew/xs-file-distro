@@ -17,8 +17,8 @@ TAGS:
 <table>
     {tags}
     <tr>
-    <td width="150px"><a href="<?php echo site_url("home/tag/");?>/{name}">{name}</td>
-    <td><a href="<?php echo site_url("manage/file/$id/removetag");?>/{name}" alt="Remove Tag">Delete</a></td>
+    <td width="150px"><a href="<?php echo site_url("home/tag/");?>/{tag_id}">{name}</td>
+    <td><a href="<?php echo site_url("manage/file/$id/removetag");?>/{tag_id}" alt="Remove Tag">Delete</a></td>
     </tr>
     {/tags}
 </table>

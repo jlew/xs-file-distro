@@ -12,8 +12,8 @@
         {description}
     </div>
     <div class="fileOptions">
-        <a href="<?php echo site_url("download/file/");?>/{ID}" title="{filename}">Download</a>
-        <a href="<?php echo site_url("manage/file/");?>/{ID}">Manage File</a>
+        <a href="<?php echo site_url("download/file/");?>/{id}" title="{filename}">Download</a>
+        <a href="<?php echo site_url("manage/file/");?>/{id}">Manage File</a>
     </div>
     </div>
 </div>

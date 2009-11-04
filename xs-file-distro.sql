@@ -26,14 +26,14 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `file` (
-  ID int(11) NOT NULL auto_increment,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(128) NOT NULL,
   filename varchar(128) NOT NULL,
   `type` varchar(40) NOT NULL,
   `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
   description text NOT NULL,
   size float NOT NULL,
-  PRIMARY KEY  (ID)
+  PRIMARY KEY  (id)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

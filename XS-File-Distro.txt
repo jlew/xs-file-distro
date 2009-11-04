@@ -8,15 +8,28 @@ to allow easy download of e-books on the XOs in a school setting.
 
 Dependencies:
   * A recent copy of the codeigniter framework: http://codeigniter.com/
-  * Apache server with sql and php support
+  * Apache/httpd server with sql and php support
 
 Installation:
+   * Get source files, the src folder will be the web root.
+       In my setup, I renamed the src folder to www and put it in
+       /var/www/xs-filedistro/
    * Configure webserver to point to the src directory as the
      root directory
    * Download a copy of the codeigniter framework.
    * Unzip the file and copy the system folder to be one directory above
      the src directory (if placed somewhere else then edit system path
      variable the index.php in the src directory)
+       In my setup, it was placed in the /var/www/xs-filedistro/ folder.
+       So that the folder had both www and system.
+   * Create database user (remember to update the database.db in the
+     application/config folder).  Then import the tables. The sql dump included
+     is for mysql, if you are using postgresql, at this time you need to
+     manually modify it. (like change int() to pure integers, remove any ` marks,
+     remove auto_increment and replace the integers for auto increment to serial.)
+     In a future release, I plan on writing an installer to automate this.
+       One note: Make sure permissions are set correctly in postgres for the db user.
+   * Update the config.php file in the application/config folder.
      
 
 Proposed Features:

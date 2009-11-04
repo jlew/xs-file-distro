@@ -1,7 +1,7 @@
 <html>
 <head>
 <title><?php echo $page_title ?></title>
-<link rel='stylesheet' type='text/css' href='/style.css' /> 
+<link rel='stylesheet' type='text/css' href='<?php echo $this->config->item('base_url');?>/style.css' /> 
 </head>
 <body>
 

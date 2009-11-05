@@ -21,6 +21,13 @@ class Manage extends Controller {
         }else if( $action == 'editdesc' ){
             $this->db_files->editFileDesc( $id, $this->input->post('desc') );
             redirect("/manage/file/$id");
+        }else if( $action == 'deleteFile' ){
+            $this->load->config('upload');
+            $fileName = $this->db_files->deleteFile( $id );
+            if( $fileName ){
+                unlink( ($this->config->item('upload_path') . $fileName) );
+            }
+            redirect("/home/");
         }
 
         $data['id'] = $id;

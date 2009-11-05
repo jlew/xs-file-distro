@@ -35,4 +35,7 @@ TAGS:
     echo form_input('tag', '');
     echo form_submit('submit', 'Add Tag');
 ?>
+
+<p><a href="<?php echo site_url("manage/file/$id/deleteFile")?>"
+      onclick="return confirm('Are you sure you want to delete this file?');">Click here to Delete File</a></p>
 </form>

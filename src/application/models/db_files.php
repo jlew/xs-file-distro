@@ -23,6 +23,25 @@ class db_files extends Model {
         $this->db->update('file', array('description'=>$desc)); 
     }
 
+    function deleteFile( $id ){
+        //Select file
+        $fileInfo = $this->getFileInfo( $id );
+
+        if( $fileInfo ){
+            //Get file tags
+            $tags = $this->getTags($id);
+
+            //Delete tags
+            foreach( $tags as $tag ){
+                $this->removeTagById( $id, $tag['tag_id'] );
+            }
+
+            //Delete file
+            $this->db->delete('file', array('id' => $id));
+            return $fileInfo['filename'];
+        }
+    }
+    
     function getFileList(){
         $query = $this->db->get('file');
         return $query->result_array();

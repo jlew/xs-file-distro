@@ -18,6 +18,11 @@ class db_files extends Model {
         return $this->db->insert('file', $data);
     }
 
+    function editFileDesc( $id, $desc ){
+        $this->db->where('id', $id);
+        $this->db->update('file', array('description'=>$desc)); 
+    }
+
     function getFileList(){
         $query = $this->db->get('file');
         return $query->result_array();

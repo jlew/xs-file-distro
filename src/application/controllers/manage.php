@@ -18,6 +18,9 @@ class Manage extends Controller {
         }else if( $action == 'removetag' ){
             $this->db_files->removeTagById( $id, $data );
             redirect("/manage/file/$id");
+        }else if( $action == 'editdesc' ){
+            $this->db_files->editFileDesc( $id, $this->input->post('desc') );
+            redirect("/manage/file/$id");
         }
 
         $data['id'] = $id;

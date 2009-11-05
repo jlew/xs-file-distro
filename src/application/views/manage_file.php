@@ -8,7 +8,14 @@
         <td width="100px"><b>Size:</b></td><td>{size}</td>
         <td width="100px"><b>Date:</b></td><td>{date}</td>
     </tr>
-    <tr><td><b>Description:</b></td><td colspan="3">{description}</td></tr>
+    <tr><td><b>Description:</b></td><td colspan="3">
+     <?php
+     echo form_open("manage/file/$id/editdesc");
+     ?>
+     <textarea name="desc" style="width: 100%;" rows=10>{description}</textarea>
+     <br><input type="submit" value="Save"/>
+    </form>
+    </td></tr>
     </tr>
 </table>
 {/info}

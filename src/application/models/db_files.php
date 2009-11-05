@@ -15,7 +15,8 @@ class db_files extends Model {
             'description' => $desc,
             'size' => $size
             );
-        return $this->db->insert('file', $data);
+        $this->db->insert('file', $data);
+        return $this->db->insert_id();
     }
 
     function editFileDesc( $id, $desc ){

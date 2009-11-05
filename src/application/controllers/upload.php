@@ -25,8 +25,7 @@ class Upload extends Controller {
             $data = array('upload_data' => $this->upload->data());
 
             // Save file data into db
-            
-            $this->db_files->addFile( 
+            $addId = $this->db_files->addFile( 
                 $data['upload_data']['raw_name'],
                 $data['upload_data']['file_name'],
                 $data['upload_data']['file_type'],
@@ -34,7 +33,7 @@ class Upload extends Controller {
                 $data['upload_data']['file_size']
             );
 
-            $this->load->view('upload_success', $data);
+            redirect( "/manage/file/$addId" );
         }
         $this->load->view('footer');
     }

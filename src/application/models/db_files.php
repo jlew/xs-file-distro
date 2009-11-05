@@ -104,7 +104,7 @@ class db_files extends Model {
 
     function getFilesByTag( $tag ){
         $tag_id = $this->_tagID( $tag );
-        $this->getFilesByTagId( $tag_id );
+        return $this->getFilesByTagId( $tag_id );
     }
     
     function getFilesByTagId( $tag_id ){

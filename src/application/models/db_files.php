@@ -122,7 +122,12 @@ class db_files extends Model {
     }
 
     function getTagList(){
-        $query = $this->db->get('tags');
+        $this->db->select('countTable.tag_id, countTable.tag_count, tags.name');
+        $this->db->from('tags');
+        $this->db->join('(SELECT COUNT( id ) AS tag_count, tag_id FROM tagmap GROUP BY tag_id) AS countTable','tags.tag_id = countTable.tag_id');
+        $this->db->order_by("tag_count", "desc");
+        
+        $query = $this->db->get();
         return $query->result_array();
     }
 

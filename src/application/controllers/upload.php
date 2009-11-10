@@ -14,6 +14,7 @@ class Upload extends Controller {
 
     function do_upload(){
         $this->load->library('upload');
+        
         $this->load->model('db_files');
 
         $this->load->view('header', array('page_title'=>"Upload file"));
@@ -23,10 +24,11 @@ class Upload extends Controller {
             $this->load->view('upload_form', $error);
         }else{
             $data = array('upload_data' => $this->upload->data());
-
+            $displayName = $this->input->post('filename');
+            
             // Save file data into db
             $addId = $this->db_files->addFile( 
-                $data['upload_data']['raw_name'],
+                $displayName,
                 $data['upload_data']['file_name'],
                 $data['upload_data']['file_type'],
                 $this->input->post('description'),

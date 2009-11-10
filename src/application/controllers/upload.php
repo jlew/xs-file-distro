@@ -28,7 +28,7 @@ class Upload extends Controller {
             
             // Save file data into db
             $addId = $this->db_files->addFile( 
-                $displayName,
+                form_prep($displayName),
                 $data['upload_data']['file_name'],
                 $data['upload_data']['file_type'],
                 $this->input->post('description'),

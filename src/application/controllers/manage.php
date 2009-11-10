@@ -25,6 +25,10 @@ class Manage extends Controller {
             $this->db_files->editFileDesc( $id, $this->input->post('desc') );
             $this->session->set_flashdata('status_message', 'Description Updated');
             redirect("/manage/file/$id");
+        }else if( $action == 'editname' ){
+            $this->db_files->editDisplayName( $id, form_prep($this->input->post('name')) );
+            $this->session->set_flashdata('status_message', 'Display Name Updated');
+            redirect("/manage/file/$id");
         }else if( $action == 'deleteFile' ){
             $this->load->config('upload');
             $fileName = $this->db_files->deleteFile( $id );

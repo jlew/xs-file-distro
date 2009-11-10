@@ -24,6 +24,11 @@ class db_files extends Model {
         $this->db->update('file', array('description'=>$desc)); 
     }
 
+    function editDisplayName( $id, $newName ){
+        $this->db->where('id', $id);
+        $this->db->update('file', array('name'=>$newName)); 
+    }
+
     function deleteFile( $id ){
         //Select file
         $fileInfo = $this->getFileInfo( $id );

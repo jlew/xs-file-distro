@@ -7,7 +7,13 @@
 {info}
 <table width="85%" border="1">
     <tr>
-        <td width="100px"><b>Name:</b></td><td>{name}</td>
+        <td width="100px"><b>Name:</b></td>
+        <td>
+          <?php echo form_open("manage/file/$id/editname",array('style'=>"display:inline;")); ?>
+          <input type="text" name="name" value="{name}" size="40" maxlength="40"/>
+          <input type="submit" value="Save"/>
+          </form>
+        </td>
         <td width="100px"><b>Type:</b></td><td>{type}</td>
     </tr>
     <tr>

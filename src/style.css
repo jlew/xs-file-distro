@@ -28,3 +28,8 @@ div.fileType, div.fileDate{
 
 div.fileName, div.fileSize{
 }
+
+.status_message{
+	font-weight: bold;
+	padding: 4px;
+}

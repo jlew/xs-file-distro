@@ -33,6 +33,8 @@ class Upload extends Controller {
                 $data['upload_data']['file_size']
             );
 
+            $this->load->library('session');
+            $this->session->set_flashdata('status_message', 'File Uploaded');
             redirect( "/manage/file/$addId" );
         }
         $this->load->view('footer');

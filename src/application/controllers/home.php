@@ -5,12 +5,14 @@ class Home extends Controller {
         $this->load->model('db_files');
         $this->load->library('parser');
         $this->load->config('display_settings');
+        $this->load->config('upload');
     }
 	
     function index(){
         $data['page_title'] = 'Home';
         
         $data['filelist'] = $this->db_files->getFilesByTag($this->config->item('homepage_tag'));
+        $data['uploadUrl'] = $this->config->item("base_url") . "/". $this->config->item("public_path");
 
         $this->load->view('header', $data);
         $this->parser->parse( 'file_list', $data );
@@ -20,6 +22,7 @@ class Home extends Controller {
     function files(){
         $data['page_title'] = 'File List';
         $data['filelist'] = $this->db_files->getFileList();
+        $data['uploadUrl'] = $this->config->item("base_url") . "/". $this->config->item("public_path");
 
         $this->load->view('header', $data);
         $this->parser->parse( 'file_list', $data );
@@ -30,6 +33,7 @@ class Home extends Controller {
         if( $tag_id != null ){
             $data['page_title'] = "Home &gt; Files taged under $tag_id";
             $data['filelist'] = $this->db_files->getFilesByTagId($tag_id);
+            $data['uploadUrl'] = $this->config->item("base_url") . "/". $this->config->item("public_path");
         
             $this->load->view('header', $data);
             $this->parser->parse( 'file_list', $data );

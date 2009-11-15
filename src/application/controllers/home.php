@@ -4,7 +4,7 @@ class Home extends Controller {
         parent::Controller();
         $this->load->model('db_files');
         $this->load->library('parser');
-        $this->load->config('display_settings');
+        $this->load->config('settings');
         $this->load->config('upload');
     }
 	

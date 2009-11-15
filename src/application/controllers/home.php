@@ -31,14 +31,18 @@ class Home extends Controller {
 
     function search(){
         $search = $this->input->post('search');
-        $data['page_title'] = "Search &gt; $search";
-        $data['filelist'] = $this->db_files->searchFile($search);
-        $data['taglist'] = $this->db_files->searchTag($search);
-        $data['uploadUrl'] = $this->config->item("base_url") . "/". $this->config->item("public_path");
-        $this->load->view('header', $data);
-        $this->parser->parse( 'tag_list', $data );
-        $this->parser->parse( 'file_list', $data );
-        $this->load->view('footer');
+        if( $search == ""){
+            redirect("/home");
+        }else{
+            $data['page_title'] = "Search &gt; $search";
+            $data['filelist'] = $this->db_files->searchFile($search);
+            $data['taglist'] = $this->db_files->searchTag($search);
+            $data['uploadUrl'] = $this->config->item("base_url") . "/". $this->config->item("public_path");
+            $this->load->view('header', $data);
+            $this->parser->parse( 'tag_list', $data );
+            $this->parser->parse( 'file_list', $data );
+            $this->load->view('footer');
+        }
     }
     
     function tag( $tag_id=null ){

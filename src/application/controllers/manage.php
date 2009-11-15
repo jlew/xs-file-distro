@@ -25,7 +25,7 @@ class Manage extends Controller {
     }
 
     function file( $id, $action='show', $data='' ){
-        $continue;
+        $continue = true;
         if( $this->config->item('ManageRequireLogin') ){
             $continue = $this->_require_admin();
         }

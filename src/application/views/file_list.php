@@ -13,7 +13,7 @@
     </div>
     <div class="fileOptions">
         <a href="<?php echo $uploadUrl; ?>{filename}" title="{filename}">Open</a>
-        <a href="<?php echo site_url("download/file/");?>/{id}" title="{filename}">Save</a>
+        <!--<a href="<?php echo site_url("download/file/");?>/{id}" title="{filename}">Save</a>-->
         <a href="<?php echo site_url("manage/file/");?>/{id}">Manage File</a>
     </div>
     </div>

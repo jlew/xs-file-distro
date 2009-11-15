@@ -11,3 +11,10 @@
 	<?php echo anchor("/home/files","File List"); ?> |
 	<?php echo anchor("/upload","Upload File"); ?>
 </div>
+<div class="search">
+<?php
+	echo form_open("/home/search");
+    echo form_input('search', '');
+    echo form_submit('submit', 'Search Files');
+?>
+</div>

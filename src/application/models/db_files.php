@@ -53,6 +53,12 @@ class db_files extends Model {
         return $query->result_array();
     }
 
+    function searchFile($search){
+        $this->db->like('name', $search);
+        $this->db->or_like('description', $search);
+        return $this->db->get('file')->result_array();
+    }
+
     function getFileInfo( $id ){
         $query = $this->db->get_where('file', array('id' => $id));
         
@@ -122,8 +128,23 @@ class db_files extends Model {
         $this->db->from('tagmap');
         $this->db->join('tags', 'tagmap.tag_id = tags.tag_id', 'inner');
         $this->db->where('tagmap.file_id', $id );
-        $query = $this->db->get();
-        return $query->result_array();
+         return $this->db->get()->result_array();
+    }
+
+    function searchTag($search){
+        $sql = "
+          SELECT t1.tag_id, t1.tag_count, tags.name
+          FROM tags
+          JOIN(
+           SELECT COUNT(id) AS tag_count, tag_id
+           FROM tagmap
+           GROUP BY tag_id
+           ) AS t1 ON tags.tag_id = t1.tag_id
+           WHERE tags.name LIKE '%" . $this->db->escape_like_str($search) . "%'
+          ORDER BY tag_count DESC
+        ";
+        
+        return $this->db->query($sql)->result_array();
     }
 
     function getTagList(){

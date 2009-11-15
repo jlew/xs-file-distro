@@ -3,8 +3,6 @@ class Manage extends Controller {
     function Manage(){
         parent::Controller();
         $this->load->model('db_files');
-        $this->load->helper('form');
-        $this->load->library('session');
     }
 	
     function index(){

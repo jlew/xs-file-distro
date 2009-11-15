@@ -17,4 +17,5 @@
     echo form_input('search', '');
     echo form_submit('submit', 'Search Files');
 ?>
+</form>
 </div>

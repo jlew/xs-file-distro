@@ -1,7 +1,7 @@
 <html>
 <head>
 <title><?php echo $page_title ?></title>
-<link rel='stylesheet' type='text/css' href='<?php echo $this->config->item('base_url');?>/style.css' /> 
+<link rel='stylesheet' type='text/css' href='<?php echo $this->config->item('base_url');?>style.css' /> 
 </head>
 <body>
 
@@ -19,3 +19,8 @@
 ?>
 </form>
 </div>
+<?php
+    if( isset( $status_message ) && $status_message){
+        echo "<p class='status_message'>$status_message</p>";
+    }
+?>

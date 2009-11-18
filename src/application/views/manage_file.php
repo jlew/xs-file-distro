@@ -1,9 +1,3 @@
-<?php
-    if( $status_message ){
-        echo "<p class='status_message'>$status_message</p>";
-    }
-?>
-
 {info}
 <table width="85%" border="1">
     <tr>

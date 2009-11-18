@@ -6,17 +6,6 @@ class Users extends Controller {
         $this->load->library('parser');
     }
 
-    function _require_admin(){
-        if( $this->session->userdata('userId') ){
-            //TODO: Validate admin from db
-            return true;
-        }else{
-            $this->session->set_flashdata('loginsource', uri_string());
-            redirect('users/showLogin');
-            return false;
-        }
-    }
-
 	function index(){
 		$this->manage();
 	}
@@ -51,7 +40,7 @@ class Users extends Controller {
 		$data['status_message'] = $this->session->flashdata('status_message');
 		
 		//Require Login or no admins to exist
-		if( $this->db_users->userCount() == 0 || $this-> _require_admin() ){
+		if( $this->db_users->userCount() == 0 || $this->db_users->requireAdmin() ){
 			if( $action == "adduser" &&
 					$this->input->post('username')!= "" &&
 					$this->input->post('password')!=""){

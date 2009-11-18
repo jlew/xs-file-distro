@@ -7,30 +7,14 @@ class Manage extends Controller {
         $this->load->config('settings');
         $this->load->library('parser');
     }
-
-    function _require_admin(){
-        if( $this->session->userdata('userId') ){
-            //$this->load->model('db_users');
-            //TODO: Validate admin from db
-            return true;
-        }else{
-            $this->session->set_flashdata('loginsource', uri_string());
-            redirect('users/showLogin');
-            return false;
-        }
-    }
     
     function index(){
         redirect( "home" );
     }
 
     function file( $id, $action='show', $data='' ){
-        $continue = true;
-        if( $this->config->item('ManageRequireLogin') ){
-            $continue = $this->_require_admin();
-        }
-
-        if($continue){
+        // Only allow if require admin is false or (true and they are logged in)
+        if( !$this->config->item('ManageRequireLogin') || $this->db_users->requireAdmin() ){
             if( $action == 'addtag'){
                 $this->db_files->addTag( $id, $this->input->post('tag') );
                 $this->session->set_flashdata('status_message', 'Tag Added');

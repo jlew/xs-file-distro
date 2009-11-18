@@ -4,6 +4,19 @@ class db_users extends Model {
         parent::Model();
     }
 
+    function requireAdmin($redirect = true){
+	if( $this->session->userdata('userId') ){
+            //TODO: Validate admin from db
+            return true;
+        }else{
+            $this->session->set_flashdata('loginsource', uri_string());
+	    if( $redirect ){
+            	redirect('users/showLogin');
+	    }
+            return false;
+        }
+    }
+
     function getAdmin( $username, $password ){
 	$this->db->where('username', $username);
 	$this->db->where('password', md5($password) );

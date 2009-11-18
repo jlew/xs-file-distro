@@ -3,30 +3,12 @@
 class Upload extends Controller {
     function Upload(){
         parent::Controller();
-        $this->load->helper('form');
         $this->load->config('settings');
-    }
-
-
-    function _require_admin(){
-        if( $this->session->userdata('userId') ){
-            //$this->load->model('db_users');
-            //TODO: Validate admin from db
-            return true;
-        }else{
-            $this->session->set_flashdata('loginsource', uri_string());
-            redirect('users/showLogin');
-            return false;
-        }
+        $this->load->model('db_users');
     }
     
     function index(){
-        $continue = true;
-        if( $this->config->item('ManageRequireLogin') ){
-            $continue = $this->_require_admin();
-        }
-
-        if($continue){
+        if(!$this->config->item('ManageRequireLogin') || $this->db_users->requireAdmin()){
             $this->load->view('header', array('page_title'=>"Upload file"));
             $this->load->view('upload_form', array('error' => ' ' ));
             $this->load->view('footer');
@@ -34,12 +16,7 @@ class Upload extends Controller {
     }
 
     function do_upload(){
-        $continue;
-        if( $this->config->item('ManageRequireLogin') ){
-            $continue = $this->_require_admin();
-        }
-
-        if($continue){
+        if(!$this->config->item('ManageRequireLogin') || $this->db_users->requireAdmin()){
             $this->load->library('upload');
             
             $this->load->model('db_files');

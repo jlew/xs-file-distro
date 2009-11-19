@@ -1,4 +1,4 @@
-<html>
+<?php	$this->lang->load('header');?><html>
 <head>
 <title><?php echo $page_title ?></title>
 <link rel='stylesheet' type='text/css' href='<?php echo $this->config->item('base_url');?>style.css' /> 
@@ -6,17 +6,17 @@
 <body>
 
 <div class="navigation">
-	<?php echo anchor("/home","Home"); ?> |
-	<?php echo anchor("/home/tag","Tag List"); ?> |
-	<?php echo anchor("/home/files","File List"); ?> |
-	<?php echo anchor("/upload","Upload File"); ?> |
-	<?php echo anchor("/users","Manage Users"); ?>
+	<?php echo anchor("/home", $this->lang->line('home')); ?> |
+	<?php echo anchor("/home/tag", $this->lang->line('tag_list')); ?> |
+	<?php echo anchor("/home/files", $this->lang->line('file_list')); ?> |
+	<?php echo anchor("/upload", $this->lang->line('upload_file')); ?> |
+	<?php echo anchor("/users", $this->lang->line('manage_users')); ?>
 </div>
 <div class="search">
 <?php
-	echo form_open("/home/search");
+    echo form_open("/home/search");
     echo form_input('search', '');
-    echo form_submit('submit', 'Search Files');
+    echo form_submit('submit', $this->lang->line('search'));
 ?>
 </form>
 </div>

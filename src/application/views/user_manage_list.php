@@ -1,15 +1,15 @@
-<h2>Manange Existing User</h2>
+<h2><?php echo $this->lang->line('manage_exist_user'); ?></h2>
 <ul>
 	{user_list}
 	<li><a href="<?php echo site_url("/users/manage/edit")?>/{id}">{username}</a></li>
 	{/user_list}
 </ul>
 
-<h2>Add User</h2>
+<h2><?php echo $this->lang->line('add_user'); ?></h2>
 <?php
 	echo form_open("/users/manage/adduser");
-    echo "Username: " . form_input('username', '') . "<br>";
-    echo "Password: " . form_password('password') . "<br>";
-    echo form_submit('submit', 'Add User');
+    echo $this->lang->line("username") . " " . form_input('username', '') . "<br>";
+    echo $this->lang->line("password") . " " . form_password('password') . "<br>";
+    echo form_submit('submit',  $this->lang->line('add_user'));
     echo "</form>";
 ?>

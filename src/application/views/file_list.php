@@ -12,9 +12,9 @@
         {description}
     </div>
     <div class="fileOptions">
-        <a href="<?php echo $uploadUrl; ?>{filename}" title="{filename}">Open</a>
-        <!--<a href="<?php echo site_url("download/file/");?>/{id}" title="{filename}">Save</a>-->
-        <a href="<?php echo site_url("manage/file/");?>/{id}">Manage File</a>
+        <a href="<?php echo $uploadUrl; ?>{filename}" title="{filename}"><?php echo $this->lang->line('open');?></a>
+        <!--<a href="<?php echo site_url("download/file/");?>/{id}" title="{filename}"><?php echo $this->lang->line('force_download');?></a>-->
+        <a href="<?php echo site_url("manage/file/");?>/{id}"><?php echo $this->lang->line('manage_file');?></a>
     </div>
     </div>
 </div>

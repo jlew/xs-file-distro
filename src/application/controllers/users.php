@@ -4,6 +4,7 @@ class Users extends Controller {
         parent::Controller();
         $this->load->model('db_users');
         $this->load->library('parser');
+        $this->lang->load('user_manage');
     }
 
 	function index(){
@@ -28,7 +29,7 @@ class Users extends Controller {
 
     function showLogin(){
 		$this->session->keep_flashdata('loginsource');
-		$data['page_title'] = "Login Required";
+		$data['page_title'] = $this->lang->line('login_required');
 				
 		$this->load->view('header', $data);
 		$this->parser->parse( 'user_login', $data );
@@ -36,7 +37,7 @@ class Users extends Controller {
 	}
 
 	function manage( $action=null, $userId=0 ){
-		$data['page_title'] = "Manage Users";
+		$data['page_title'] = $this->lang->line('manage_users');
 		$data['status_message'] = $this->session->flashdata('status_message');
 		
 		//Require Login or no admins to exist
@@ -53,11 +54,7 @@ class Users extends Controller {
 				
 			}else if( $userId == 0 ){
 				//show user list
-				
-
-				
 				$data['user_list'] = $this->db_users->getUserList();
-
 				
 				$this->load->view('header', $data);
 				$this->parser->parse( 'user_manage_list', $data );
@@ -73,17 +70,17 @@ class Users extends Controller {
 				}else if( $action == "changePass" && $this->input->post('password')!=""){
 					
 					$this->db_users->changePassword( $userId, $this->input->post('password') );
-					$this->session->set_flashdata('status_message',"Password Changed");
+					$this->session->set_flashdata('status_message',$this->lang->line('pass_changed'));
 					redirect("/users/manage/edit/$userId");
 					
 				}else if( $action == "delete" ){
 					if( $this->session->userdata("userId") != $userId ){
 						
 						$this->db_users->deleteUser( $userId );
-						$this->session->set_flashdata('status_message',"User Deleted");
+						$this->session->set_flashdata('status_message',$this->lang->line('user_deleted'));
 						redirect("/users/manage/");
 					}else{
-						$this->session->set_flashdata('status_message',"For security reasons, you may not delete yourself");
+						$this->session->set_flashdata('status_message',$this->lang->line('delete_self_err'));
 						redirect("/users/manage/edit/$userId");
 					}
 				}

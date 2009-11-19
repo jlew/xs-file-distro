@@ -43,5 +43,5 @@ TAGS:
 ?>
 
 <p><a href="<?php echo site_url("manage/file/$id/deleteFile")?>"
-      onclick="return confirm('<?php echo $this->lang->line('conf_file_del');?>');"><?php echo $this->lang->line('file_del');?></a></p>
+      onclick="return confirm('<?php echo $this->lang->line('conf_del_file');?>');"><?php echo $this->lang->line('del_file');?></a></p>
 </form>

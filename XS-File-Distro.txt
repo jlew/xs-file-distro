@@ -1,3 +1,5 @@
+http://wiki.sugarlabs.org/go/School_Server/RIT/File_Distribution_System
+
 What is this project?
 This is a php script that will act as a file library for the XO Server (XS).
 The goal of this script is to build sever that will act as the back end
@@ -8,6 +10,11 @@ to allow easy download of e-books on the XOs in a school setting.
 
 Dependencies:
   * A recent copy of the codeigniter framework: http://codeigniter.com/
+  	* There may be an error with the sql system at in the "1.7.2" version
+  	  If you see any weird probelms or errors with the search system
+  	  then see this post: http://codeigniter.com/forums/viewthread/129041/
+  	  for the fix
+  	  
   * Apache/httpd server with sql and php support
 
 Installation:
@@ -24,20 +31,24 @@ Installation:
        So that the folder had both www and system.
    * Create database user (remember to update the database.db in the
      application/config folder).  Then import the tables. The sql dump included
-     is for mysql, if you are using postgresql, at this time you need to
-     manually modify it. (like change int() to pure integers, remove any ` marks,
-     remove auto_increment and replace the integers for auto increment to serial.)
+     is for mysql and one for postgres.
      In a future release, I plan on writing an installer to automate this.
        One note: Make sure permissions are set correctly in postgres for the db user.
-   * Update the config.php file in the application/config folder.
+   * Update the config.php, database.php, and settings.php files in the application/config folder.
      
+
+Features:
+	Files orginized by Tags
+	Searchable description, filename, and tags
+	Admins:
+        - Add/Delete/Edit files
+        - Configure admins
 
 Proposed Features:
     Upload/Download/Browse API as well as web browser access.
-    All files will have searchable meta-data
-    Admins:
-        - Add/Delete/Edit files
-        - Configure admin and set basic permissions of users
+    Allow more meta-data for searching
+    	(might not be useful as jorunal doesn't support much more then tags and descriptions)
+    Better Admin Controls
     Normal Users
         - Have public file upload directory
         - May manage their own files
@@ -45,3 +56,4 @@ Proposed Features:
 
 Contact:
     Justin Lewis        jtl1728@rit.edu
+    http://wiki.sugarlabs.org/go/User:Jlew
